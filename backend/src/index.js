@@ -20,11 +20,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:  process.env.PORT==5001?"http://localhost:5173":"chatapp-umber-nine.vercel.app",
     credentials: true,
   })
 );
-
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
